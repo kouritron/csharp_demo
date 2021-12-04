@@ -1,0 +1,33 @@
+
+
+Problem statement:
+
+Implement a class with two methods:
+
+1. A method that takes an integer and outputs the integer in reverse order. For example:
+
+int ReverseInteger(int input)
+
+If you pass input = 12345, the output will be 54321
+
+Ideally the ReverseInteger method should not use any string conversion/manipulation. Instead use mathmatical operators and/or other data structures.
+
+2. A method that takes two integers A and B and returns true if B is the reverse of A. For example:
+
+bool IsReverseInteger(int A, int B)
+
+If you pass A = 12345, B = 54321 the method returns true
+If you pass A = 12345, B = 99999 the method returns false
+
+
+-----------------------------------------------------------------------
+
+A few hints / things to keep in mind:
+
+1. Think about validating input.
+2. Think about testing your implementation.
+
+
+
+
+
