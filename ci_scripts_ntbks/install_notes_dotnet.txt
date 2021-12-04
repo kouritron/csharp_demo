@@ -1,0 +1,67 @@
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# there is .NET SDK or runtime
+# .NET SDK is persumably similar to OpenJDK, where as the runtime should be comparable to OpenJRE
+
+
+# SDK or runtime from ubuntu snap store:
+sudo snap install dotnet-sdk --classic --channel=6.0
+sudo snap install dotnet-runtime-60 --classic
+
+# or to avoid the below bug:
+sudo snap install dotnet-sdk --classic --channel=latest/edge
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------- permission bug
+# after this we should have a "$ dotnet" command available, but there is a bug w/ the snap package permissions
+# it should work as is, but doesnt. it says permission denied. adding a sudo would "fix it", but now if you
+# install anything they would be root owned and you have to manually chown and chmod directories
+
+# ---------- for example these work:
+$ sudo dotnet --list-sdks
+6.0.100 [/snap/dotnet-sdk/147/sdk]
+
+$ sudo dotnet-sdk.dotnet --version
+6.0.100
+
+
+# ---------- and this does not work:
+$ dotnet --list-sdks
+cannot snap-exec: cannot exec "/snap/dotnet-sdk/147/snap/command-chain/snapcraft-runner": permission denied
+
+# this is a upstream bug. a number of workarounds are suggested here: https://github.com/dotnet/core/issues/4446
+
+# one solution that worked for now is, switching to latest/edge channel:
+$ sudo snap remove dotnet-sdk
+$ sudo snap install dotnet-sdk --classic --channel=latest/edge
+
+# unfortunately this ends up w/
+$ dotnet --version
+5.0.202
+
+# I dont know if thats a problem since mono is 6 at the moment, but here is what we got so far:
+
+$ dotnet --list-runtimes
+Microsoft.AspNetCore.App 5.0.5 [/snap/dotnet-sdk/120/shared/Microsoft.AspNetCore.App]
+Microsoft.NETCore.App 5.0.5 [/snap/dotnet-sdk/120/shared/Microsoft.NETCore.App]
+
+$ dotnet --list-sdks
+5.0.202 [/snap/dotnet-sdk/120/sdk]
+
+# another alternative is avoiding the snap package:
+# https://docs.microsoft.com/en-us/dotnet/core/install/linux-scripted-manual#scripted-install
+
+
+# NOTE dont get bugged down with this if it doesnt work,
+# move runtime/sdk into a docker container and run everything as root, have vscode remote into it.
+# this issue seems to been repeatedly fixed, regressed, fixed, regressed, for 1 year+
+
+
+
+
+
+
+

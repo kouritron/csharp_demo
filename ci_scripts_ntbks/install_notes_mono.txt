@@ -1,0 +1,89 @@
+
+
+
+# Note: we may want to stay away from mono, according to stack overflow
+# its entirely separate thing from MS .NET
+# Microsoft bought this company so there is confusion. but .NET itself supports ubuntu.
+
+# according to stack overflow mono-development is quite dead, they largely only develop the parts relevant
+# to Android and iOS anymore, because that's where Xamarin makes their money.
+
+
+# ------------------------------- 2020 update:
+
+This is no more .NET Core vs. Mono. It's unified.
+
+Update as of November 2020 - .NET 5 released that unifies .NET Framework and .NET Core
+
+.NET and Mono will be unified under .NET 6 that would be released in November 2021
+
+.NET 6.0 will add net6.0-ios and net6.0-android.
+The OS-specific names can include OS version numbers, like net6.0-ios14.
+Check below articles:
+
+https://devblogs.microsoft.com/dotnet/introducing-net-multi-platform-app-ui/
+https://github.com/dotnet/maui
+
+
+
+
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+# Ubuntu 20.04 (amd64, arm64)
+sudo apt install gnupg ca-certificates
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+sudo apt update
+
+
+# Ubuntu 18.04 (amd64, arm64)
+sudo apt install gnupg ca-certificates
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+sudo apt update
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+
+# compiler and debug symbols. current stable version is 6.12 as of late 2021.
+sudo apt install mono-devel mono-complete mono-dbg ca-certificates-mono
+
+
+# for running ASP.NET, this will configure itself to listen from anywhere (bind to 0.0.0.0:8084)
+# but wont run it just with install. check with "ss -plnt"
+sudo apt install mono-xsp4
+
+
+# for building .NET applications you can get the monodevelop IDE for ubuntu
+sudo apt install monodevelop 
+
+# NUnit plugin for the IDE
+sudo apt install monodevelop-nunit
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+For compatibility reasons, Mono’s System.Environment.Version property returns the version of the .NET profile that
+Mono targets, not the version of Mono that is being used. This should be the same version number that .NET would return
+As such, it will return 2.0.X.Y when running under the 2.0 profile, even though it’s running under Mono 1.1. :-)
+
+# this will return mono's version as opposed .NET version that is targeted.
+$ mono --version
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
