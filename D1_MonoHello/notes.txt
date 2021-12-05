@@ -1,0 +1,28 @@
+
+docker run --rm -it -v $(pwd):/mono_ws ubuntu:20.04 bash
+
+
+apt install gnupg ca-certificates curl wget nano htop python3
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | tee /etc/apt/sources.list.d/mono-official-stable.list
+apt update
+
+
+apt install mono-complete
+
+mono --version
+
+
+cd /mono_ws
+umask 0
+
+csc HelloWorld.cs
+mono HelloWorld.exe
+
+# should print something like:
+# Hello Mono
+# System.Environment.Version: 4.0.30319.42000
+# System.Environment.OSVersion: Unix 5.4.0.91
+
+
+
