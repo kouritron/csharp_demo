@@ -7,6 +7,7 @@ namespace HelloApp {
             Console.WriteLine("Hello Mono");
             Console.WriteLine("System.Environment.Version: " + System.Environment.Version);
             Console.WriteLine($"System.Environment.OSVersion: {System.Environment.OSVersion}");
+            // Console.WriteLine("Current time is: " + DateTime.Now);
         }
     }
 }

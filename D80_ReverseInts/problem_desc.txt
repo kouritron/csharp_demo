@@ -10,7 +10,8 @@ int ReverseInteger(int input)
 
 If you pass input = 12345, the output will be 54321
 
-Ideally the ReverseInteger method should not use any string conversion/manipulation. Instead use mathmatical operators and/or other data structures.
+Ideally the ReverseInteger method should not use any string conversion/manipulation. Instead use mathmatical operators
+and/or other data structures.
 
 2. A method that takes two integers A and B and returns true if B is the reverse of A. For example:
 

@@ -1,0 +1,29 @@
+
+TODO:
+write a C# example daemonized program that generates a random number every hour and saves it under:
+/home/user/daemonized_demo
+
+# -------------------- 
+# A daemonized program is a long-running background process that provides certain services.
+# Ideally a daemonized process should at least (not exahustive):
+
+- Close all open file descriptors.
+- Change current working directory.
+- Reset the file access creation mask.
+- Run in the background.
+- Disassociate from process group.
+- Ignore terminal I/O signals.
+- Disassociate itself from such a thing as controlling terminal.
+
+
+On linux a double fork strategy is common to achive these. Python has some helper packages.
+TODO find a solution for dotnet/C#
+
+
+
+
+
+
+
+
+

@@ -1,4 +1,6 @@
 
+# we probably wont use mono going fwd. dotnet from snap store works well. but here is the hello world.
+
 docker run --rm -it -v $(pwd):/mono_ws ubuntu:20.04 bash
 
 
