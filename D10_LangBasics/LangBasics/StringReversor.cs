@@ -34,22 +34,24 @@ namespace LangBasics
         /// </summary>
         public string getReverse()
         {
- 
-            ReverseCharsInRange(startIdx: 0, endIdx: chars.Length-1);
 
-// last_delim_idx = 0
+            ReverseCharsInRange(startIdx: 0, endIdx: chars.Length - 1);
 
-// for i in range(len(a)):
-//     if ' ' == a[i]:
-//         # found 2nd delim
-//         # swap token
-//         # save last delim
-//         reverse_items(a, last_delim_idx, i-1)
-//         last_delim_idx = i+1
+            int lastDelimIdx = 0;
 
-// # deal w last token
-// reverse_items(a, last_delim_idx, len(a)-1)
+            for (int i = 0; i < chars.Length; i++)
+            {
+                if (' ' == chars[i])
+                {
+                    // Found a new delim character.
+                    // swap characters in the token with start and ends = [lastDelimIdx, i-1]
+                    ReverseCharsInRange(lastDelimIdx, i - 1);
+                    lastDelimIdx = i + 1;
+                }
+            }
 
+            // deal w last token
+            ReverseCharsInRange(lastDelimIdx, chars.Length - 1);
 
             return new string(chars);
         }
