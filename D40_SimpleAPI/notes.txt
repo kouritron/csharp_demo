@@ -1,0 +1,7 @@
+
+# create new API barebones using: 
+
+dotnet new webapi -o SimpleAPI --no-https
+
+
+
