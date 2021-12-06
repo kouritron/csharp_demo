@@ -5,20 +5,64 @@ namespace ReverseIntsApp
     class Program
     {
 
-        static int ReverseInteger(int input)
+        private static bool isReversible(int input)
         {
-            int result = 0;
+            return false;
+        }
 
+        // -------------------------------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------------------- exports
+        public static bool IsReverseInteger(int A, int B)
+        {
+            return false;
+        }
+
+        public static int ReverseInteger(int input)
+        {
+
+            // TODO: assert is reversible
+
+
+            // reverse
+            int result = 0;
+            while (0 != input)
+            {
+                int digit = input % 10;
+                input = input / 10;
+                result *= 10;
+                result += digit;
+            }
             return result;
         }
 
-
         static void Main(string[] args)
         {
-            // Console.WriteLine("Current time is: " + DateTime.Now);
+            int input = 1234;
+            Console.WriteLine($"{input} --> {ReverseInteger(input)}");
             
-            // reverse int
-
+            input = 3450;
+            Console.WriteLine($"{input} --> {ReverseInteger(input)}");
+            
+            input = 98321;
+            Console.WriteLine($"{input} --> {ReverseInteger(input)}");
+            
+            input = 111000;
+            Console.WriteLine($"{input} --> {ReverseInteger(input)}");
         }
     }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------------------------------ exceptions
+    public class IrreversibleInt32Exception : Exception
+    {
+        public IrreversibleInt32Exception()
+        {
+        }
+
+        public IrreversibleInt32Exception(string message) : base(message)
+        {
+        }
+    }
+
+
 }
