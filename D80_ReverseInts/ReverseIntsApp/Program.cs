@@ -2,14 +2,29 @@
 
 namespace ReverseIntsApp
 {
-    class Program
+    // -----------------------------------------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------------------------------ exceptions
+    public class IrreversibleInt32Exception : Exception
     {
-        public static bool IsReverseInteger(int A, int B)
+        public IrreversibleInt32Exception()
         {
-            int rev_A = ReverseInteger(A);
-            int rev_B = ReverseInteger(B);
+        }
 
-            if (rev_A == B || rev_B == A)
+        public IrreversibleInt32Exception(string message) : base(message)
+        {
+        }
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------------------------- Reverse Integer
+    public class Program
+    {
+        public static bool IsReverseInteger(int a, int b)
+        {
+            int revA = ReverseInteger(a);
+            int revB = ReverseInteger(b);
+
+            if (revA == b || revB == a)
             {
                 return true;
             }
@@ -44,9 +59,11 @@ namespace ReverseIntsApp
             return (int)result;
         }
 
+        // -------------------------------------------------------------------------------------------------------------
+        // --------------------------------------------------------------------------------------------------------- DBG
         static void Main(string[] args)
         {
-            Console.WriteLine($"int.MaxValue: {int.MaxValue}");
+            // Console.WriteLine($"int.MaxValue: {int.MaxValue}");
 
             int input = 1234;
             Console.WriteLine($"{input} --> {ReverseInteger(input)}");
@@ -75,48 +92,28 @@ namespace ReverseIntsApp
                 Console.WriteLine($"good catch for: {input}");
             }
 
-            try
-            {
-                input = 1000000003;
-                Console.WriteLine($"{input} --> {ReverseInteger(input)}");
-            }
-            catch (IrreversibleInt32Exception ex)
-            {
-                Console.WriteLine($"good catch for: {input} --- exception message: {ex}");
-            }
+            // try
+            // {
+            //     input = 1000000003;
+            //     Console.WriteLine($"{input} --> {ReverseInteger(input)}");
+            // }
+            // catch (IrreversibleInt32Exception ex)
+            // {
+            //     Console.WriteLine($"good catch for: {input} --- exception message: {ex}");
+            // }
 
             // ----- 2nd func
-            if (IsReverseInteger(14, 41000))
-            {
-                Console.WriteLine("check");
-            }
+            // if (IsReverseInteger(14, 41000))
+            // {
+            //     Console.WriteLine("check");
+            // }
 
-            if (IsReverseInteger(14, 41))
-            {
-                Console.WriteLine("check");
-            }
+            // if (IsReverseInteger(14, 41))
+            // {
+            //     Console.WriteLine("check");
+            // }
 
-            if (! IsReverseInteger(98321, 1000000001))
-            {
-                Console.WriteLine("check");
-            }
-            
             // IsReverseInteger(1000000003, 11);
         }
     }
-
-    // -----------------------------------------------------------------------------------------------------------------
-    // ------------------------------------------------------------------------------------------------------ exceptions
-    public class IrreversibleInt32Exception : Exception
-    {
-        public IrreversibleInt32Exception()
-        {
-        }
-
-        public IrreversibleInt32Exception(string message) : base(message)
-        {
-        }
-    }
-
-
 }
