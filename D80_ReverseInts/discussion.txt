@@ -1,0 +1,69 @@
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------- overview
+- xtract the digits from input on the right side, one at a time, by moding with 10.
+- drop the rightmost digit using a truncating integer division by 10 i.e. input = int(input/10)
+- this will give off the number one digit at a time, and we can reassemble result from this.
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------- note1
+problem statement imposes a "int" type for argument and return values.
+
+C# "int" type is alias for System.Int32
+32 bit signed number. whose range is:
+
+[-2_147_483_648, 2_147_483_647]
+
+[-(2^31), (2^31)-1]
+
+
+what happens if user supplied 1_999_999_999 ?? this is a valid int for input, but return value is not valid int.
+
+TODO: Ask product owner/customer about this.
+
+- My working assumption for C# is to throw an exception.
+- Golang does not have exceptions and heavily discourages using panic/recover. I can see why they hate C++ exceptions.
+They wrote a blog post about solving this problem by getting rid of exceptions altoghether :)
+- Pythonic code encourages __overusing__ exceptions, and this works very well IMO, in layered code like a REST API.
+- Even golang builtin "http" package uses panic/recover to emulate exceptions for this scenario.
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------- note2
+
+input = 4100
+You would expect reverse would be: 0014 but int type will only store 14. so the return value will be 14.
+
+This results in a loss of information. The ReverseInt operation itself is not reversible. i.e.
+this is not always true:
+
+ReverseInt(ReverseInt(inputNumber)) != inputNumber
+
+** make a note of this for the Customer/PO
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------- negative numbers
+In case of input == -325
+
+obviously int can not store
+result == 523-
+
+Its upto PO/Customer to decide if this is invalid input or the negative sign is to be ignored.
+Again C# code feels like demands an exception here, so thats what I'll do for now unless new clarification is made.
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# TODO: write a integer as string reversor, and compare that the integer int reversor, using lots of random numbers
+to see if any other corner cases exist. I'll probably do this in a jupyter notebook interactively.
+
+
+
+
+
+
+
+
+
+
