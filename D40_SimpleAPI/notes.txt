@@ -1,7 +1,111 @@
 
-# create new API barebones using: 
+# ---------- create new API barebones using:
 
 dotnet new webapi -o SimpleAPI --no-https
+
+# ---------- run it
+
+dotnet run
+
+this will launch a http server and print the listen address i.e. localhost:5000
+You can also find this using socket stat program (ss -plnt)
+looks like its listening on the IPv6 stack as well. ie
+http://[::1]:5000/WeatherForecast
+returns a JSON document.
+
+
+# ---------- routes
+"dotnet new webapi" results in a barebones app with these routes:
+
+/WeatherForecast
+
+and these:
+
+swagger/v1/swagger.json
+swagger/index.html
+
+# ---------- example
+
+$ curl -X GET http://localhost:5000/WeatherForecast
+
+[{"date":"2021-12-07T04:17:19.0625472-05:00","temperatureC":11,"temperatureF":51,"summary":"Hot"},{"date":"2021-12-08T04:17:19.0625503-05:00","temperatureC":19,"temperatureF":66,"summary":"Cool"},{"date":"2021-12-09T04:17:19.0625509-05:00","temperatureC":-12,"temperatureF":11,"summary":"Warm"},{"date":"2021-12-10T04:17:19.0625513-05:00","temperatureC":38,"temperatureF":100,"summary":"Cool"},{"date":"2021-12-11T04:17:19.0625529-05:00","temperatureC":18,"temperatureF":64,"summary":"Freezing"}]
+
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# lets hit it with wrk, example:
+
+$ wrk -c 10 -d 5 -t 2 http://localhost:5000
+
+# -c is number of connections.
+# -d is duration of the test/benchmark in seconds.
+# -t number of threads used by wrk
+
+
+
+# ---------- results:
+
+1 wrk thread, 10 connections =============> total req/s ~ 100k
+2 wrk thread, 10 connections =============> total req/s ~ 133k
+3 wrk thread, 10 connections =============> total req/s ~ 122k
+4 wrk thread, 10 connections =============> total req/s ~ 107k
+8 wrk thread, 10 connections =============> total req/s ~ 110k
+
+1 wrk thread, 1 connections =============> total req/s ~ 17k
+16 wrk thread, 16 connections =============> total req/s ~ 162k
+
+
+** the avg latencies are very good compared to python/tornado. its measured in us (micro seconds),
+with 10 ms (millisecond) worst cases, thats almost the python best case. To be expected from .NET/C#
+
+** Huge numbers of non-200 or 300 responses getting generated. TODO Find out what the hell is going on. 
+
+# ---------- detailed results
+
+>>>>>>>>>> wrk -c 10 -d 5 -t 1 http://localhost:5000
+Running 5s test @ http://localhost:5000
+  1 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    96.07us  196.03us  10.04ms   98.84%
+    Req/Sec   104.62k     3.04k  111.20k    72.00%
+  520054 requests in 5.00s, 49.10MB read
+  Non-2xx or 3xx responses: 520054
+Requests/sec: 104008.76
+Transfer/sec:      9.82MB
+
+
+>>>>>>>>>> wrk -c 10 -d 5 -t 2 http://localhost:5000
+Running 5s test @ http://localhost:5000
+  2 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   134.72us  481.06us  18.92ms   96.97%
+    Req/Sec    67.72k    11.52k   85.77k    67.33%
+  679903 requests in 5.10s, 64.19MB read
+  Non-2xx or 3xx responses: 679903
+Requests/sec: 133320.74
+Transfer/sec:     12.59MB
+
+
+>>>>>>>>>> wrk -c 10 -d 5 -t 3 http://localhost:5000
+Running 5s test @ http://localhost:5000
+  3 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   105.57us  336.80us   8.64ms   97.89%
+    Req/Sec    40.90k     4.22k   48.75k    69.93%
+  622406 requests in 5.10s, 58.76MB read
+  Non-2xx or 3xx responses: 622406
+Requests/sec: 122054.42
+Transfer/sec:     11.52MB
 
 
 
