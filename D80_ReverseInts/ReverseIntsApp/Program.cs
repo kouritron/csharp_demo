@@ -4,10 +4,21 @@ namespace ReverseIntsApp
 {
     class Program
     {
+
+        static int ReverseInteger(int input)
+        {
+            int result = 0;
+
+            return result;
+        }
+
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            Console.WriteLine("Current time is: " + DateTime.Now);
+            // Console.WriteLine("Current time is: " + DateTime.Now);
+            
+            // reverse int
+
         }
     }
 }

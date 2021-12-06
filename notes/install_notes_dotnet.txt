@@ -2,14 +2,14 @@
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
-# there is .NET SDK and there is runtime .NET SDK seems similar to OpenJDK,
-# and the runtime would be comparable to OpenJRE
+# there is a "dotnet-sdk" snap, its proabbly equivalent to OpenJDK ubuntu package,
+# there is also "dotnet-runtime-60" snap (for .NET 6) and I guess thats comparable to OpenJRE package.
 
 # Get SDK or runtime from ubuntu snap store:
 sudo snap install dotnet-sdk --classic --channel=6.0
 sudo snap install dotnet-runtime-60 --classic
 
-# or to avoid the below bug:
+# or to avoid the below bug (as of dec 2021):
 sudo snap install dotnet-sdk --classic --channel=latest/edge
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ sudo snap install dotnet-sdk --classic --channel=latest/edge
 # ------------------------------------------------------------------------------------------------------- permission bug
 # after snap install we should have a "dotnet" command available, but there is a bug w/ the snap package permissions.
 # It should work as is, but doesnt. it says permission denied. Adding a sudo would "fix it", but now if you
-# install anything they would be root owned and you have to manually chown and chmod directories
+# install anything they would be root owned and you have to manually chown and chmod everything.
 
 # ---------- for example these work:
 $ sudo dotnet --list-sdks
@@ -38,7 +38,7 @@ cannot snap-exec: cannot exec "/snap/dotnet-sdk/147/snap/command-chain/snapcraft
 $ sudo snap remove dotnet-sdk
 $ sudo snap install dotnet-sdk --classic --channel=latest/edge
 
-# unfortunately this ends up with 5 not 6. none of the 6 channels fix this problem right now.
+# unfortunately this ends up with 5 not 6 (as of dec 2021). none of the 6 channels fix this problem right now.
 # so now we have:
 $ dotnet --version
 5.0.202
@@ -54,22 +54,27 @@ $ dotnet --list-sdks
 # https://docs.microsoft.com/en-us/dotnet/core/install/linux-scripted-manual#scripted-install
 
 
-# ---------- Better alternative:
+# ---------- moar alternatives:
 # run everything as root inside a docker container, have vscode remote into it, for now until we figure out what
-# the hell is going on. This should get fixed soon also. its been getting repeatedly fixed, regressed, fixed,
-# regressed, .... on github for nearly 1 year by the looks of it.
+# the hell is going on later. Its not worth fixing this problem because it will be probably fixed in the near future.
 
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------------------------- dotnet hello
 
-# create new console project
+# ---------- Console project:
 dotnet new console -o MyApp
-
 ....
-
 dotnet run
 
+
+# ---------- Web:
+# this is for emitting html
+dotnet new webapp -o MyWebApp --no-https
+
+
+# this is for emitting JSON
+dotnet new webapi -o SimpleAPI --no-https
 
 

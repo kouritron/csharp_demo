@@ -1,0 +1,18 @@
+
+# this one came from:
+dotnet new webapp -o MyWebApp --no-https
+
+This is the wrong one. This one emits HTML. We'll look at this one later.
+
+
+# For the benchmark example I am probably looking for this:
+dotnet new webapi -o SimpleAPI --no-https
+
+
+
+
+
+
+
+
+
