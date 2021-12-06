@@ -1,0 +1,47 @@
+
+# ------------------------------------------------------------------------------------------------------------------- q1
+ReverseInteger(4100) returns 14, as int type can not distinguish 14 with 0014.
+Is this the desired behavior ?? plz note the loss of information and inherent irreversibilty of this operation.
+
+
+# ------------------------------------------------------------------------------------------------------------------- q2
+input == -325
+what is desired behavior for this ??
+
+Obviously int type can not store "523-"
+At the moment this is treated as invalid input and results in exception.
+
+# ------------------------------------------------------------------------------------------------------------------- q3
+input == 1_999_999_999
+is a valid int (int32) but its reverse is not. what is desired behavior here ??
+
+At the moment this is treated as invalid input and results in exception.
+
+# ------------------------------------------------------------------------------------------------------------------- q4
+for 2nd function
+bool IsReverseInteger(int A, int B)
+
+what if A == ReverseInteger(B) is true, but B == ReverseInteger(A) is not ??
+
+ie
+
+A = 4100
+B = 14
+
+ReverseInteger(A) == B
+but
+ReverseInteger(B) != A
+
+At the moment if either of the above conditions are true this method returns true. is this desired behavior ??
+
+
+# ------------------------------------------------------------------------------------------------------------------- q5
+for 2nd function
+bool IsReverseInteger(int A, int B)
+
+If one or both is not reversible (ReverseInteger() throws exception), do we return false or exception ??
+
+At the moment the working assumption is that if either A or B is not reversible this function allows the exception
+to go through it. Alternatively it could return false.
+
+

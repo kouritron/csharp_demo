@@ -29,16 +29,31 @@ They wrote a blog post about solving this problem by getting rid of exceptions a
 - Even golang builtin "http" package uses panic/recover to emulate exceptions for this scenario.
 
 
+
+# ----- implementation note.
+counting up from 1 to +1_999_999_999 its not like the numbers are small enof to be reversed (and fit in int32),
+than they become too large and stay there. For example:
+
+ReverseInteger(1000000002) <= max_32bit     // true
+ReverseInteger(1000000003) <= max_32bit     // false
+ReverseInteger(1000090001) <= max_32bit     // true
+
+This case is important, because you have to check after the result has been produced, rather check input to be in
+good to go range at the start and then reverse it. So maybe use a long for temporary storage to avoid overflowing
+in the meantime.
+
+
+
 # ----------------------------------------------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------------------------------- note2
 
 input = 4100
 You would expect reverse would be: 0014 but int type will only store 14. so the return value will be 14.
 
-This results in a loss of information. The ReverseInt operation itself is not reversible. i.e.
+This results in a loss of information. The ReverseInteger operation itself is not reversible. i.e.
 this is not always true:
 
-ReverseInt(ReverseInt(inputNumber)) != inputNumber
+ReverseInteger(ReverseInteger(input)) != input
 
 ** make a note of this for the Customer/PO
 
@@ -52,11 +67,35 @@ result == 523-
 Its upto PO/Customer to decide if this is invalid input or the negative sign is to be ignored.
 Again C# code feels like demands an exception here, so thats what I'll do for now unless new clarification is made.
 
+# ----------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------- 2nd function
+for the 2nd function
+bool IsReverseInteger(int A, int B)
+
+TODO: ask if one or both is not reversible, do we return false or exception ??
+
+working with assumption that if either A or B is not reversible (throws exception), this function should
+throw exception. alternatively it could return false.
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
-# TODO: write a integer as string reversor, and compare that the integer int reversor, using lots of random numbers
-to see if any other corner cases exist. I'll probably do this in a jupyter notebook interactively.
+What if A == ReverseInteger(B) is true, but B == ReverseInteger(A) is not ??
+
+this can arise if loss of information has occured due to leading/trailing zero situation described above.
+
+TODO: this really needs clarification, I have no idea which behavior is desired, but I will choose __or__ for now.
+
+if either condition is true, return true, otherwise return false.
+
+
+
+
+
+
+
+
+
 
 
 
