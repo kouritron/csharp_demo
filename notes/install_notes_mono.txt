@@ -11,28 +11,23 @@
 
 # ------------------------------- 2020 update:
 
-This is no more .NET Core vs. Mono. It's unified.
+This is no more .NET Core vs .NET framework. It's unified.
 
-Update as of November 2020 - .NET 5 released that unifies .NET Framework and .NET Core
+Update as of November 2020 .NET 5 released that unifies .NET Framework and .NET Core
 
-.NET and Mono will be unified under .NET 6 that would be released in November 2021
+Further .NET and Mono will be unified under .NET 6 that would be released in November 2021 (for real ??)
 
 .NET 6.0 will add net6.0-ios and net6.0-android.
 The OS-specific names can include OS version numbers, like net6.0-ios14.
-Check below articles:
+Check out below articles:
 
 https://devblogs.microsoft.com/dotnet/introducing-net-multi-platform-app-ui/
 https://github.com/dotnet/maui
 
 
-
-
-
-
-
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
-
+# to get mono on ubuntu
 
 # Ubuntu 20.04 (amd64, arm64)
 sudo apt install gnupg ca-certificates
@@ -55,7 +50,7 @@ sudo apt install mono-devel mono-complete mono-dbg ca-certificates-mono
 
 
 # for running ASP.NET, this will configure itself to listen from anywhere (bind to 0.0.0.0:8084)
-# but wont run it just with install. check with "ss -plnt"
+# but wont run it just with install. check with socketstat (ss -plnt)
 sudo apt install mono-xsp4
 
 
@@ -68,7 +63,7 @@ sudo apt install monodevelop-nunit
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
-
+# version note:
 
 For compatibility reasons, Mono’s System.Environment.Version property returns the version of the .NET profile that
 Mono targets, not the version of Mono that is being used. This should be the same version number that .NET would return
