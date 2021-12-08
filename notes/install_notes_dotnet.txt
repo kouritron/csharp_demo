@@ -12,6 +12,11 @@ sudo snap install dotnet-runtime-60 --classic
 # or to avoid the below bug (as of dec 2021):
 sudo snap install dotnet-sdk --classic --channel=latest/edge
 
+
+# Add this shortcut so vscode can find dotnet.
+ln -s /snap/dotnet-sdk/current/dotnet /home/zu/bin/dotnet
+
+
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------- permission bug
