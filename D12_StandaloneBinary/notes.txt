@@ -1,0 +1,20 @@
+
+Super easy to do in dotnet:
+
+# steps
+
+# ... make a console app ... ie helloworld
+
+shell> dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained false
+
+# look under bin, you get a 170 KB sort of standalone binary. Its a single file app, that contains all your project but not dotnet runtime.
+# or change the self-contained flag to true:
+
+
+shell> dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained true
+ 
+
+# now you get a 60 MB single standalone binary that contains all your app and the runtime. Amazing ....s
+
+
+
